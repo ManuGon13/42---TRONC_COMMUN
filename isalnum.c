@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:20:04 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/04 14:56:03 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/06 11:32:39 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	isalnum(int c)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	int	i;
 
@@ -36,4 +36,4 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	return (0);
-}
+}*/

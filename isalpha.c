@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:21:42 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/04 14:53:12 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/06 11:31:55 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	isalpha(int c)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	int	i;
 
@@ -35,4 +35,4 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	return (0);
-}
+}*/

@@ -1,43 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memchr.c                                           :+:      :+:    :+:   */
+/*   strdup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 17:21:43 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/06 11:38:05 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/06 14:22:16 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/07 14:15:44 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdio.h>
 
-void	*memchr(const void *s, int c, size_t n)
+char	*strdup(const char *s)
 {
-	const unsigned char	*p = (const unsigned char *)s;
-	unsigned char		uc;
+	size_t	len;
+	size_t	i;
+	char	*dup;
 
-	uc = (unsigned char)c;
-	while (n > 0)
+	i = 0;
+	len = 0;
+	while (s [len])
+		len++;
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
 	{
-		if (*p == uc)
-			return ((void *)p);
-		p++;
-		n--;
+		dup[i] = s[i];
+		i++;
 	}
-	return (NULL);
+	dup[i] = '\0';
+	return (dup);
 }
 
-/*int	main(void)
+int	main(void)
 {
-	char	*str;
-	char	*ptr;
+	char	*src;
+	char	*dup;
 
-	str[] = "Bonjour";
-	*ptr = memchr(str, 'j', 7);
-	if (ptr)
-		printf("Trouve : %s\n", ptr);
-	else
-		printf("Non trouve\n");
+	src = "Hello 42";
+	dup = strdup(src);
+	printf("%s\n", dup);
+	free(dup);
 	return (0);
-}*/
+}

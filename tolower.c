@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:15:56 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/05 11:49:46 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/06 11:36:24 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	toupper(int c)
 	return (c);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	printf("%c\n", toupper('a'));
 	printf("%c\n", toupper('Z'));
 	printf("%c\n", toupper('!'));
 	return (0);
-}
+}*/

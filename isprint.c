@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:20:04 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/04 15:35:48 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/06 11:33:36 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	isprint(int c)
 	return (0);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int		i;
 	char	str[];
@@ -35,4 +35,4 @@ int	main(void)
 		i++;
 	}
 	return (0);
-}
+}*/

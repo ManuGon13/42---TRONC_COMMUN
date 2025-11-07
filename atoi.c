@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_exam.c                                     :+:      :+:    :+:   */
+/*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 19:38:37 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/05 18:55:30 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/06 11:39:09 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_space(char *c)
 		return (0);
 }
 
-int	ft_atoi(char *str)
+int	atoi(char *nptr)
 {
 	int	i;
 	int	sign;
@@ -30,28 +30,28 @@ int	ft_atoi(char *str)
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (ft_space(&str[i]) == 1)
+	while (ft_space(&nptr[i]) == 1)
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		if (str[i] == '-')
+		if (nptr[i] == '-')
 			sign = -1;
-		else if (str[i] == '+')
+		else if (nptr[i] == '+')
 			sign = 1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		result = result * 10 + str[i] - '0';
+		result = result * 10 + nptr[i] - '0';
 		i++;
 	}
 	return (result * sign);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	char	*str;
 
 	str = "-2147483647";
-	printf("%d\n", ft_atoi(str));
-}
+	printf("%d\n", atoi(str));
+}*/

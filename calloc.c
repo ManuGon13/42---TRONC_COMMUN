@@ -1,38 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isdigit.c                                          :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 11:50:51 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/06 11:32:13 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/06 11:48:43 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/06 12:18:35 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-int	isdigit(int c)
+void	*calloc(size_t nmemb, size_t size)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	void			*ptr;
+	unsigned char	*p;
+	size_t			total;
+
+	total = nmemb * size;
+	ptr = malloc(total);
+	if (!ptr)
+		return (NULL);
+	p = (unsigned char *)ptr;
+	while (total > 0)
+	{
+		*p = 0;
+		p++;
+		total--;
+	}
+	return (ptr);
 }
 
-/*int	main(int argc, char **argv)
+int	main(void)
 {
+	int	*tab;
 	int	i;
 
 	i = 0;
-	if (argc != 2)
-		return (0);
-	while (argv[1][i] != '\0')
+	tab = calloc(5, sizeof(int));
+	if (!tab)
+		return (1);
+	while (i < 5)
 	{
-		if (isdigit (argv[1][i]))
-			printf("%c est un chiffre\n", argv[1][i]);
-		else
-			printf("%c n'est pas un chiffre\n", argv[1][i]);
+		printf("%d ", tab[i]);
 		i++;
 	}
+	printf("\n");
+	free(tab);
 	return (0);
-}*/
+}

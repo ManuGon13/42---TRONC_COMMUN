@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 10:31:17 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/05 11:15:17 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/06 11:35:44 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t	strlcat(char *dst, const char *src, size_t size)
 	return (dlen + slen);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	const char	src[] = " World";
 	char		dst[];
@@ -48,4 +48,4 @@ int	main(void)
 	printf("dst: %s\n", dst);
 	printf("%zu\n", size);
 	return (0);
-}
+}*/

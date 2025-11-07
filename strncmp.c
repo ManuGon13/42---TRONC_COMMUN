@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 16:12:47 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/05 19:27:35 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/06 11:37:25 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	const char	s1[] = "Hello";
 	const char	s2[] = "Hallo";
 
 	printf("la difference est: %d\n", strncmp(s1, s2, 5));
 	return (0);
-}
+}*/

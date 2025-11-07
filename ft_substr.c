@@ -1,46 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlcpy.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 10:00:30 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/06 11:35:24 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/07 14:18:35 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/07 17:41:12 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-size_t	strlcpy(char *dst, const char *src, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
+	char		*dup;
+	unsigned int	i;
 
 	i = 0;
-	if (siz > 0)
+	if (s == NULL)
+		return (NULL);
+	if (start > strlen(s))
 	{
-		while (src[i] && i < size - 1)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
+		dup = malloc(1);
+		if (!dup)
+			return (NULL);
+		dup[0] = '\0';
 	}
-	while (src[i])
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = s[i + start];
 		i++;
-	return (i);
+	}
+	dup[i] = '\0';
+	return (dup);
 }
 
-/*int	main(void)
+int	main(void)
 {
-	const char	src[] = "Hello, world!";
-	char		dst[];
-	size_t		size;
+	char	*src;
+	char	*dup;
 
-	dst[] = "Couco";
-	size = strlcpy(dst, src, sizeof (dst));
-	printf("dst: %s\n", dst);
-	printf("src length : %zu\n", size);
+	src = "Bonjour";
+	dup = ft_substr(src, 3, 4);
+	printf("%s\n", dup);
+	free(dup);
 	return (0);
-}*/
+}

@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:51:15 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/05 12:33:01 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/06 11:36:44 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*strchr(const char *s, int c)
 	return (NULL);
 }
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	const char	*str;
 	char		*c;
@@ -47,4 +47,4 @@ int	main(int argc, char **argv)
 	else
 		printf("Caractere '%c' non trouve dans: \"%s\"\n", c, str);
 	return (0);
-}
+}*/
