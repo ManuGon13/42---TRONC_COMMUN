@@ -1,15 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   strdup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 17:23:14 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/07 17:32:28 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/04 14:20:04 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/04 15:35:48 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strtrim(char const *s1, char const *set)
+#include <string.h>
+
+char    *strdup(const char *s)
 {
-	
+    char    *dup;
+    size_t  i;
+    size_t  len;
+
+    i = 0;
+    len = 0;
+    while(s[len])
+        len++;
+    dup = malloc(len + 1);
+    if (!dup)
+        return(NULL)
+    while (i < len)
+    {
+        dup[i] = s[i];
+        i++;
+    }
+    dup[i] = '\0';
+    return (dup);
+}
