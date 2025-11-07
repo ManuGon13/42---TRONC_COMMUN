@@ -1,54 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 14:18:35 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/07 17:41:12 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/07 17:33:53 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/07 17:36:42 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char		*dup;
-	unsigned int	i;
+	char	*res;
+	size_t	len1;
+	size_t	len2;
+	size_t	i;
+	size_t	j;
 
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	len1 = strlen(s1);
+	len2 = strlen(s2);
+	res = malloc((len1 + len2 + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
 	i = 0;
-	if (s == NULL)
-		return (NULL);
-	if (start > strlen(s))
+	while (i < len1)
 	{
-		dup = malloc(1);
-		if (!dup)
-			return (NULL);
-		dup[0] = '\0';
-	}
-	dup = malloc(len + 1);
-	if (!dup)
-		return (NULL);
-	while (i < len)
-	{
-		dup[i] = s[i + start];
+		res[i] = s1[i];
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	j = 0;
+	while (j < len2)
+	{
+		res[i + j] = s2[j];
+		j++;
+	}
+	res[i + j] = '\0';
+	return (res);
 }
 
 int	main(void)
 {
-	char	*src;
-	char	*dup;
+	char const	*a;
+	char const	*b;
 
-	src = "Bonjour";
-	dup = ft_substr(src, 3, 4);
-	printf("%s\n", dup);
-	free(dup);
+	a = "Allez";
+	b = " l'OM";
+	printf("%s\n", ft_strjoin(a, b));
 	return (0);
 }

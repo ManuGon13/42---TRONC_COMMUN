@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   strdup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 14:18:35 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/07 17:41:12 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/06 14:22:16 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/07 14:15:44 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*strdup(const char *s)
 {
-	char		*dup;
-	unsigned int	i;
+	size_t	len;
+	size_t	i;
+	char	*dup;
 
 	i = 0;
-	if (s == NULL)
-		return (NULL);
-	if (start > strlen(s))
-	{
-		dup = malloc(1);
-		if (!dup)
-			return (NULL);
-		dup[0] = '\0';
-	}
+	len = 0;
+	while (s [len])
+		len++;
 	dup = malloc(len + 1);
 	if (!dup)
 		return (NULL);
 	while (i < len)
 	{
-		dup[i] = s[i + start];
+		dup[i] = s[i];
 		i++;
 	}
 	dup[i] = '\0';
@@ -46,8 +40,8 @@ int	main(void)
 	char	*src;
 	char	*dup;
 
-	src = "Bonjour";
-	dup = ft_substr(src, 3, 4);
+	src = "Hello 42";
+	dup = strdup(src);
 	printf("%s\n", dup);
 	free(dup);
 	return (0);

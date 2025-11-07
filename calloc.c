@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 14:18:35 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/07 17:41:12 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/06 11:48:43 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/06 12:18:35 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	*calloc(size_t nmemb, size_t size)
 {
-	char		*dup;
-	unsigned int	i;
+	void			*ptr;
+	unsigned char	*p;
+	size_t			total;
 
-	i = 0;
-	if (s == NULL)
+	total = nmemb * size;
+	ptr = malloc(total);
+	if (!ptr)
 		return (NULL);
-	if (start > strlen(s))
+	p = (unsigned char *)ptr;
+	while (total > 0)
 	{
-		dup = malloc(1);
-		if (!dup)
-			return (NULL);
-		dup[0] = '\0';
+		*p = 0;
+		p++;
+		total--;
 	}
-	dup = malloc(len + 1);
-	if (!dup)
-		return (NULL);
-	while (i < len)
-	{
-		dup[i] = s[i + start];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+	return (ptr);
 }
 
 int	main(void)
 {
-	char	*src;
-	char	*dup;
+	int	*tab;
+	int	i;
 
-	src = "Bonjour";
-	dup = ft_substr(src, 3, 4);
-	printf("%s\n", dup);
-	free(dup);
+	i = 0;
+	tab = calloc(5, sizeof(int));
+	if (!tab)
+		return (1);
+	while (i < 5)
+	{
+		printf("%d ", tab[i]);
+		i++;
+	}
+	printf("\n");
+	free(tab);
 	return (0);
 }
