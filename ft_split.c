@@ -6,28 +6,19 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 19:48:41 by egonin            #+#    #+#             */
-/*   Updated: 2025/10/02 12:16:40 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/07 19:49:14 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 
-int	is_sep(char c, char *charset)
+int	is_sep(char c, char sep)
 {
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (1);
-		i++;
-	}
-	return (0);
+	return (c == sep);
 }
 
-int	count_words(char *str, char *charset)
+int	count_words(char const *str, char c)
 {
 	int	i;
 	int	count;
@@ -36,19 +27,19 @@ int	count_words(char *str, char *charset)
 	count = 0;
 	while (str[i])
 	{
-		while (str[i] && is_sep(str[i], charset))
+		while (str[i] && is_sep(str[i], c))
 			i++;
 		if (str[i])
 		{
 			count++;
-			while (str[i] && !is_sep(str[i], charset))
+			while (str[i] && !is_sep(str[i], c))
 			i++;
 		}
 	}
 	return (count);
 }
 
-char	*word_dup(char *str, char *charset)
+char	*word_dup(char const *str, char c)
 {
 	int		i;
 	int		len;
@@ -56,7 +47,7 @@ char	*word_dup(char *str, char *charset)
 
 	i = 0;
 	len = 0;
-	while (str[len] && is_sep(str[len], charset) == 0)
+	while (str[len] && is_sep(str[len], c) == 0)
 		len++;
 	word = malloc((len + 1) * sizeof(char));
 	if (!word)
@@ -70,7 +61,7 @@ char	*word_dup(char *str, char *charset)
 	return (word);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char const *str, char c)
 {
 	int		i;
 	int		j;
@@ -78,18 +69,18 @@ char	**ft_split(char *str, char *charset)
 
 	i = 0;
 	j = 0;
-	tab = malloc((count_words(str, charset) + 1) * sizeof(char *));
+	tab = malloc((count_words(str, c) + 1) * sizeof(char *));
 	if (!tab)
 		return (NULL);
 	while (str[i])
 	{
-		while (str[i] && is_sep(str[i], charset) == 1)
+		while (str[i] && is_sep(str[i], c) == 1)
 			i++;
 		if (str[i])
 		{
-			tab[j] = word_dup(&str[i], charset);
+			tab[j] = word_dup(&str[i], c);
 			j++;
-			while (str[i] && is_sep(str[i], charset) == 0)
+			while (str[i] && is_sep(str[i], c) == 0)
 				i++;
 		}
 	}
@@ -99,11 +90,13 @@ char	**ft_split(char *str, char *charset)
 
 int	main(void)
 {
-	char	**result;
-	int		i;
+	char		**result;
+	char const	*str;
+	int			i;
 
 	i = 0;
-	result = ft_split("Hello, 42, Paris", " ,");
+	str = "Hello, 42, Paris";
+	result = ft_split(str, ',');
 	while (result[i])
 	{
 		printf("[%s]\n", result[i]);

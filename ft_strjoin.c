@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:33:53 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/07 17:36:42 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/07 18:10:45 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	j = 0;
 	while (j < len2)
-	{
-		res[i + j] = s2[j];
-		j++;
-	}
-	res[i + j] = '\0';
+		res[i++] = s2[j++];
+	res[i] = '\0';
 	return (res);
 }
 
