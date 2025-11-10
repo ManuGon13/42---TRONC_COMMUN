@@ -1,34 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 12:20:51 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/10 18:44:00 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/10 18:44:32 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/10 19:41:59 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 #include <stdio.h>
-#include <stdlib.h>
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+ t_list  *ft_lstnew(void *content)
+ {
+	t_list  *new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next  = NULL;
+	return (new);
+ }
+
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del) (void *))
 {
-	if (!lst || !f)
-		return ;
+	t_list	*new_list;
+	t_list	*new_elem;
+
+	if (!lst || !f || !del)
+		return (NULL);
+	new_list = NULL;
 	while (lst)
 	{
-		f(lst->content);
-		lst =lst->next;
+		new_elem = ft_lstnew(f(lst->content));
+		if (!new_elem)
+		{
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, new_elem);
+		lst = lst->next;
 	}
+	return (new_list);
 }
 
-void	f(void	*content)
+void	del(void *content)
 {
-	char	*str = (char *)content;
-	int	i;
+	free(content);
+}
+
+void    f(void  *content)
+{
+	char    *str = (char *)content;
+	int     i;
 
 	i = 0;
 	while (str[i])
@@ -39,9 +67,9 @@ void	f(void	*content)
 	}
 }
 
-int	main(void)
+int     main(void)
 {
-	t_list	*lst;
+	t_list  *lst;
 
 	lst = malloc(sizeof(t_list));
 	if (!lst)
@@ -65,7 +93,7 @@ int	main(void)
 	s[9] = 'm';
 	s[10] = '\0';
 	lst->next = NULL;
-	ft_lstiter(lst, f);
+	ft_lstmap(lst, *f, del);
 	printf("maillon modif:%s\n", (char *)lst->content);
 	free(lst->content);
 	free(lst);

@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 10:51:20 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/10 11:10:29 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/10 17:44:56 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	main(void)
 		return (1);
 	}
 	node->next = NULL;
-
 	printf("avant suppr : node = %p, content = %p\n", node, node->content);
 	ft_lstdelone(node, del);
 	printf("apres suppr : maillon suppr \n");

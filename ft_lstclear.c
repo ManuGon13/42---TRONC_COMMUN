@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:28:10 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/10 13:01:46 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/10 17:43:21 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
 	t_list	*next;
 
+	next = NULL;
 	if (!lst || !del)
 		return ;
 	while (*lst)
@@ -35,48 +36,33 @@ void	del(void *content)
 	free(content);
 }
 
-char	*strdup(const char *s)
-{
-	int	i;
-	char	*copy;
-
-	i = 0;
-	while (s[i])
-		i++;
-	copy = malloc(i + 1);
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		copy[i] = s[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
-}
-
-t_list  *list(char *s)
-{
-	t_list  *n;
-
-	n = malloc(sizeof(*n));
-	n->content = strdup(s);
-	n->next = NULL;
-	return (n);
-}
-
 int	main(void)
 {
 	t_list	*a;
 	t_list	*b;
-	t_list	*c;
 
-	a = list("A");
-	b = list("B");
-	c = list("C");
+	a = malloc(sizeof(t_list));
+	b = malloc(sizeof(t_list));
+	if (!a || !b)
+		return (1);
+	a->content = malloc(2 * sizeof(char));
+	b->content = malloc(2 * sizeof(char));
+	if (!a->content)
+	{
+		free(a);
+		return (1);
+	}
+	if (!b->content)
+	{
+		free(b);
+		return (1);
+	}
+	((char *)a->content)[0] = 'A';
+	((char *)a->content)[1] = '\0';
+	((char *)b->content)[0] = 'B';
+	((char *)b->content)[1] = '\0';
 	a->next = b;
-	b->next = c;
+	b->next = NULL;
 	ft_lstclear(&a, del);
 	printf("a = %p\n", (void *)a);
 	return (0);

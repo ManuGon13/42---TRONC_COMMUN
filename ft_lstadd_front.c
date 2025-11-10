@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 10:21:27 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/10 12:14:50 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/10 17:01:25 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,31 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 	*lst = new;
 }
 
-t_list	*list(char *s)
-{
-	t_list	*n;
-
-	n = malloc(sizeof(*n));
-	n->content = s;
-	n->next = NULL;
-	return (n);
-}
-
 int	main(void)
 {
 	t_list	*lst;
 	t_list	*new;
 
-	lst = list("B");
-	new = list("A");
+	lst = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_list));
+	if (!lst || !new)
+		return (1);
+	lst->content = malloc(20 * sizeof(char));
+	new->content = malloc(20 * sizeof(char));
+	if (!lst->content)
+	{
+		free(lst);
+		return (1);
+	}
+	if (!new->content)
+	{
+		free(new);
+		return (1);
+	}
+	lst->content = "A";
+	new->content = "B";
+	lst->next = new;
+	new->next = NULL;
 	ft_lstadd_front(&lst, new);
 	printf("1er maillon : %s\n", (char *)lst->content);
 	printf("suivant : %s\n", (char *)lst->next->content);
