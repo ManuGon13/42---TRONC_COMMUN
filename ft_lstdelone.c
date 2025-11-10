@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 17:25:00 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/10 12:18:28 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/10 10:51:20 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/10 11:10:29 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (!lst || !new)
+	if (!lst || !del)
 		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	last = *lst;
-	while (last->next)
-	last = last->next;
-	last->next = new;
+	del(lst->content);
+	free(lst);
 }
 
-t_list  *list(char *s)
+void	del(void *content)
 {
-	t_list  *n;
-
-	n = malloc(sizeof(*n));
-	n->content = s;
-	n->next = NULL;
-	return (n);
+	free(content);
 }
 
 int	main(void)
 {
-	t_list	*lst;
-	t_list	*new;
+	t_list	*node;
 
-	lst = list("B");
-	new = list("A");
-	ft_lstadd_fback(&lst, new);
-	printf("1er maillon : %s\n", (char *)lst->content);
-	printf("suivant : %s\n", (char *)lst->next->content);
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (1);
+	node->content = malloc(20 * sizeof(char));
+	if (!node->content)
+	{
+		free(node);
+		return (1);
+	}
+	node->next = NULL;
+
+	printf("avant suppr : node = %p, content = %p\n", node, node->content);
+	ft_lstdelone(node, del);
+	printf("apres suppr : maillon suppr \n");
 	return (0);
 }

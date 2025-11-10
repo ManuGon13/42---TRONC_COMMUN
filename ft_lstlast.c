@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:50:36 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/08 18:18:40 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/10 10:28:23 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_list	*ft_lstnew(void *content)
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
-		return NULL;
+		return (NULL);
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
@@ -37,10 +37,10 @@ t_list	*ft_lstlast(t_list *lst)
 
 int	main(void)
 {
-	t_list  *a;
-	t_list  *b;
-	t_list  *c;
-	t_list  *last;
+	t_list	*a;
+	t_list	*b;
+	t_list	*c;
+	t_list	*last;
 
 	a = ft_lstnew("A");
 	b = ft_lstnew("B");

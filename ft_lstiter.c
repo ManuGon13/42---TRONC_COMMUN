@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 17:50:36 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/10 10:35:00 by egonin           ###   ########.fr       */
+/*   Created: 2025/11/10 12:20:51 by egonin            #+#    #+#             */
+/*   Updated: 2025/11/10 12:29:01 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_list	*ft_lstnew(void *content)
+void	ft_lstiter(t_list *lst,void (*f)(void *))
 {
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
-}
-
-int	ft_lstsize(t_list *lst)
-{
-	int	count;
-
-	count = 0;
+	if (!lst || !f)
+		return ;
 	while (lst)
 	{
-		count++;
-		lst = lst->next;
+		f(lst->content);
+		lst =lst->next;
 	}
-	return (count);
 }
 
-int	main(void)
-{
-	t_list	*a;
-	t_list	*b;
-	t_list	*c;
-
-	a = ft_lstnew("A");
-	b = ft_lstnew("B");
-	c = ft_lstnew("C");
-	a->next = b;
-	b->next = c;
-	printf("taille de la liste : %d\n", ft_lstsize(a));
-	return (0);
-}

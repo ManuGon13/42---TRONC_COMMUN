@@ -6,12 +6,12 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:13:49 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/08 17:18:46 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/10 10:29:48 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 typedef struct	s_list
 {
-void		*content;
-struct s_list	*next;
+	void	*content;
+	struct s_list	*next;
 }		t_list;
