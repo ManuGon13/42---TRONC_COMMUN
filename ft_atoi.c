@@ -6,14 +6,14 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 19:38:37 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/11 16:01:31 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/11 17:24:01 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-int	ft_space(char *c)
+int	ft_space(const char *c)
 {
 	if ((*c >= 9 && *c <= 13) || *c == 32)
 		return (1);
@@ -21,7 +21,7 @@ int	ft_space(char *c)
 		return (0);
 }
 
-int	ft_atoi(char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	int	i;
 	int	sign;

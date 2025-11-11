@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 19:38:37 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/11 16:09:33 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/11 17:26:55 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	main(void)
 {
-	char	*str;
+	const char	*str;
 
 	str = "-2147483647";
 	printf("%d\n", ft_atoi(str));
