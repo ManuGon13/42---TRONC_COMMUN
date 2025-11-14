@@ -6,7 +6,7 @@
 /*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 10:51:20 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/11 11:51:59 by egonin           ###   ########.fr       */
+/*   Updated: 2025/11/13 19:43:19 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	free(lst);
 }
 
-void	del(void *content)
+/*void	del(void *content)
 {
 	free(content);
-}
+}*/
