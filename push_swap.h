@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 16:22:09 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/02 17:41:13 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/02 17:49:23 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,4 @@ typedef struct	s_ps
 	int	size_a;
 	int	size_b;
 	int	size_max;
-}	t_ps
+}	t_ps;
