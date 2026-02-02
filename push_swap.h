@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_lstnew.c                                      :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egonin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 16:44:11 by egonin            #+#    #+#             */
-/*   Updated: 2025/11/11 12:11:57 by egonin           ###   ########.fr       */
+/*   Created: 2026/02/02 16:22:09 by egonin            #+#    #+#             */
+/*   Updated: 2026/02/02 17:41:13 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
-#include <stdio.h>
-
-int	main(void)
+typedef struct	s_ps
 {
-	t_list	*node;
-
-	node = ft_lstnew("Bonjour");
-	if (node)
-	{
-		printf("Contenu : %s\n", (char *)node->content);
-		printf("Next : %p\n", node->next);
-	}
-	return (0);
-}
+	int	*a;
+	int	*b;
+	int	size_a;
+	int	size_b;
+	int	size_max;
+}	t_ps
