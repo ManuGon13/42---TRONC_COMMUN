@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:18:13 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/02 21:03:57 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/02 21:09:21 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,5 +215,7 @@ int	main(int argc, char **argv)
 		free(result);
 		i++;
 	}
+	if (x != ps->size_a)
+		error_n_free(ps);
 	return (0);
 }
