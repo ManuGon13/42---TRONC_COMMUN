@@ -161,6 +161,37 @@ char	**ft_split(char *str)
 	return (nums_char);
 }
 
+int	*tab_dup(int *tab, int size)
+{
+	int		i;
+	int		*copy;
+
+	i = 0;
+	copy = malloc((size) * sizeof(int));
+	if (!copy)
+		return (NULL);
+	while (i < size)
+	{
+		copy[i] = tab[i];
+		i++;
+	}
+	return (copy);
+}
+
+int	check_doublon(int x, int *tab, int j)
+{
+	int	i;
+
+	i = 0;
+	while (i < j)
+	{
+		if (tab[i] == x)
+			return (1)
+		i++;
+		}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	char	**result;
@@ -198,7 +229,7 @@ int	main(int argc, char **argv)
 	}
 	ps->a = malloc(ps->size_a * sizeof(int));
 	if (!ps->a)
-		return(NULL);
+		return(1);
 	i = 1;
 	while (argv[i])
 	{
@@ -207,6 +238,8 @@ int	main(int argc, char **argv)
 		while (result[j])
 		{
 			num_conv = ft_atol(result[j], ps);
+			if (check_doublon((int)num_conv, ps->a, x) == 1)
+				error_n_free(ps);
 			ps->a[x] = (int)num_conv;
 			free(result[j]);
 			j++;
