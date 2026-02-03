@@ -6,17 +6,17 @@
 #    By: egonin <egonin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/10 20:24:40 by egonin            #+#    #+#              #
-#    Updated: 2026/02/02 15:34:00 by egonin           ###   ########.fr        #
+#    Updated: 2026/02/03 17:23:47 by egonin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 
-SRCS		= operations.c \
-		  	  algo.c \
-			  utils.c \
+SRCS		= utils.c \
 			  main.c \
+			  #operations.c \
+		  	  algo.c \\#
 	  
 OBJS		= $(SRCS:.c=.o)
 

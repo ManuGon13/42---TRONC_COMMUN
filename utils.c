@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:18:13 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/02 21:09:21 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/03 17:33:22 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,10 +161,110 @@ char	**ft_split(char *str)
 	return (nums_char);
 }
 
+int	*tab_dup(int *tab, int size)
+{
+	int		i;
+	int		*copy;
+
+	i = 0;
+	copy = malloc((size) * sizeof(int));
+	if (!copy)
+		return (NULL);
+	while (i < size)
+	{
+		copy[i] = tab[i];
+		i++;
+	}
+	return (copy);
+}
+
+int	*bubble_sort_tab(int *tab, int size)
+{
+	int	*sort_copy;
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = 0;
+	sort_copy = tab_dup(tab, size);
+	while (i < size - 1)
+	{
+		j = 0;
+		while (j < size - 1 - i)
+		{
+			if (sort_copy[j] > sort_copy[j + 1])
+			{
+				tmp = sort_copy[j + 1];
+				sort_copy[j + 1] = sort_copy[j];
+				sort_copy[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return(sort_copy);
+}
+
+int	*index_sorted(int *tab, int size)
+{
+	int	*index_tab;
+	int	*sort_copy;
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	sort_copy  = bubble_sort_tab(tab, size);
+	index_tab = tab_dup(tab, size);
+	while (i < size)
+	{
+		j = 0;
+		count = 0;
+		while (j < size && count == 0)
+		{
+			if ( tab[i] == sort_copy[j])
+			{	
+				index_tab[i] = j;
+				count++;
+			}
+			j++;
+		}
+		i++;
+	}
+	free(sort_copy);
+	return (index_tab);
+}
+
+int	check_doublon(int x, int *tab, int j)
+{
+	int	i;
+
+	i = 0;
+	while (i < j)
+	{
+		if (tab[i] == x)
+			return (1);
+		i++;
+		}
+	return (0);
+}
+
+/*void print_tab(const char *name, int *tab, int size)
+{
+    int i = 0;
+    printf("%s: ", name);
+    while (i < size)
+    {
+        printf("%d ", tab[i]);
+        i++;
+    }
+    printf("\n");
+}*/
 int	main(int argc, char **argv)
 {
 	char	**result;
 	long	num_conv;
+	int		*index_a;
 	int		i;
 	int		x;
 	int		j;
@@ -175,7 +275,7 @@ int	main(int argc, char **argv)
 	x = 0;
 	if (argc == 1)
 		return(write(1, "\n", 1));
-	ps = malloc(sizeof(t_ps))
+	ps = malloc(sizeof(t_ps));
 	if (!ps)
 		return (1);
 	ps->a = NULL;
@@ -198,7 +298,7 @@ int	main(int argc, char **argv)
 	}
 	ps->a = malloc(ps->size_a * sizeof(int));
 	if (!ps->a)
-		return(NULL);
+		return(1);
 	i = 1;
 	while (argv[i])
 	{
@@ -207,6 +307,8 @@ int	main(int argc, char **argv)
 		while (result[j])
 		{
 			num_conv = ft_atol(result[j], ps);
+			if (check_doublon((int)num_conv, ps->a, x) == 1)
+				error_n_free(ps);
 			ps->a[x] = (int)num_conv;
 			free(result[j]);
 			j++;
@@ -215,7 +317,14 @@ int	main(int argc, char **argv)
 		free(result);
 		i++;
 	}
-	if (x != ps->size_a)
+	/*print_tab("A avant", ps->a, ps->size_a);/*TEST*/
+	index_a = index_sorted(ps->a, ps->size_a);
+	if (!index_a)
 		error_n_free(ps);
+	free(ps->a);
+	ps->a = index_a;
+	/*print_tab("Index", index_a, ps->size_a);/*TEST*/
 	return (0);
 }
+
+
