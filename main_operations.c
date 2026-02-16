@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:52:10 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/12 14:38:25 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 17:15:33 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	push_b(int *a, int *b, int *size_a, int *size_b)
 {
 	int	tmp;
 	int	i;
-	
+
 	if (*size_a == 0)
 		return ;
 	tmp = a[0];
@@ -90,7 +90,7 @@ void	push_a(int *a, int *b, int *size_a, int *size_b)
 {
 	int	tmp;
 	int	i;
-	
+
 	if (*size_b == 0)
 		return ;
 	tmp = b[0];
@@ -110,24 +110,3 @@ void	push_a(int *a, int *b, int *size_a, int *size_b)
 	a[0] = tmp;
 	(*size_a)++;
 }
-
-/*int	main(void)
-{
-	int	i;
-	t_ps ps;
-	int a[] = {2, 9, 1, 7};
-	int b[] = {0, 0, 0};
-
-	ps.a = a;
-	ps.b = b;
-	i = 0;
-	ps.size_a = 4;
-	ps.size_b = 0;
-	op_pb(&ps);
-	while (i < ps.size_a)
-    {
-        printf("%d ", ps.a[i]);
-        i++;
-    }
-	return (0);
-}*/

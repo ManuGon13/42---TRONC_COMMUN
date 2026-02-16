@@ -33,31 +33,30 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	mapping_op(t_ps *ps, char *op)
+int	is_sorted(int *a, int size_a)
 {
-	if (!ft_strcmp(op, "pa"))
-		op_pa(ps);
-	else if (!ft_strcmp(op, "pb"))
-		op_pb(ps);
-	else if (!ft_strcmp(op, "ra"))
-		op_ra(ps);
-	else if (!ft_strcmp(op, "rb"))
-		op_rb(ps);
-	else if (!ft_strcmp(op, "rr"))
-		op_rr(ps);
-	else if (!ft_strcmp(op, "rra"))
-		op_rra(ps);
-	else if (!ft_strcmp(op, "rrb"))
-		op_rrb(ps);
-	else if (!ft_strcmp(op, "rrr"))
-		op_rrr(ps);
-	else if (!ft_strcmp(op, "sa"))
-		op_sa(ps);
-	else if (!ft_strcmp(op, "sb"))
-		op_sb(ps);
-	else if (!ft_strcmp(op, "ss"))
-		op_ss(ps);
-	else
-		return (0);
-	return (1);
+	int	i;
+
+	i = 0;
+	while (i < size_a - 1)
+	{
+		if (a[i] > a[i + 1])
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+static void	print_stack(char *name, int *tab, int size)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("%s: ", name);
+	while (i < size)
+	{
+		ft_printf("%d ", tab[i]);
+		i++;
+	}
+	ft_printf("\n");
 }

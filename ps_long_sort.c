@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 18:41:28 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/12 14:39:06 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 17:39:00 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,16 @@
 #include <stdlib.h>
 #include <limits.h>
 
-void	radix_sort(t_ps *ps)
+void	radix_sort_core(t_ps *ps)
 {
+	int	max_bits;
 	int	i;
 	int	j;
-	int	max;
-	int	max_bits;
 	int	n;
 
-	if (!ps || ps->size_a < 2)
-		return ;
-	max = ps->size_a - 1;
 	max_bits = 0;
 	i = 0;
-	while ((max >> max_bits) != 0)
+	while (((ps->size_a - 1) >> max_bits) != 0)
 		max_bits++;
 	while (i < max_bits)
 	{
@@ -47,4 +43,11 @@ void	radix_sort(t_ps *ps)
 			op_pa(ps);
 		i++;
 	}
+}
+
+void	radix_sort(t_ps *ps)
+{
+	if (!ps || ps->size_a < 2)
+		return ;
+	radix_sort_core(ps);
 }
