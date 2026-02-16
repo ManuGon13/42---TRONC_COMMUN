@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:18:13 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/12 15:36:36 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/04 18:38:27 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,11 +325,6 @@ int	main(int argc, char **argv)
 	ps->a = index_a;
 	if (is_sorted(ps->a, ps->size_a))
 		return (0);
-	if (ps->size_a <= 5)
-		sort_small_stack(&ps);
-	else
-		radix_sort(&ps);
-	free_ps(&ps);
 	/*print_tab("Index", index_a, ps->size_a);/*TEST*/
 	return (0);
 }

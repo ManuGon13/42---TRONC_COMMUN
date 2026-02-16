@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 16:22:09 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/12 15:05:28 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/04 11:52:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#define PUSH_SWAP_H
 
 typedef struct	s_ps
 {
@@ -38,18 +38,6 @@ void	op_rr(t_ps *ps);
 void	op_rra(t_ps *ps);
 void	op_rrb(t_ps *ps);
 void	op_rrr(t_ps *ps);
-int		ft_strcmp(const char *s1, const char *s2);
-int		mapping_op(t_ps *ps, char *op);
-void	error_n_free(t_ps *ps);
-int		ft_space(const char *c);
-int		is_number(char *str, t_ps *ps);
-long	ft_atol(const char *str, t_ps *ps);
-int		count_nums(char *str);
-char	*num_dup(char *str);
-char	**ft_split(char *str);
-int		*tab_dup(int *tab, int size);
-int		*bubble_sort_tab(int *tab, int size);
-int		*index_sorted(int *tab, int size);
-int		check_doublon(int x, int *tab, int j);
+int	mapping_op(t_ps *ps, char *op);
 
 #endif
