@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 14:20:57 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 18:49:45 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 19:47:48 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,42 @@ int	count_numbers(int argc, char **argv, t_ps *ps)
 		while (result[j])
 		{
 			ps->size_a++;
-			free(result[j]);
 			j++;
 		}
-		free(result);
+		free_split(result);
 		i++;
 	}
 	return (j);
 }
 
-void	parse_into_a_helper(char **result, t_ps *ps)
+void	free_split(char **split)
+{
+	int	i;
+
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+void	parse_into_a_helper(char **result, t_ps *ps, int *x)
 {
 	int		j;
-	int		x;
 	long	num_conv;
 
 	j = 0;
-	x = 0;
 	while (result[j])
 	{
 		num_conv = ft_atol(result[j], ps);
-		if (check_doublon((int)num_conv, ps->a, x) == 1)
+		if (check_doublon((int)num_conv, ps->a, *x) == 1)
 			error_n_free(ps);
-		ps->a[x] = (int)num_conv;
-		free(result[j]);
-		x++;
+		ps->a[*x] = (int)num_conv;
+		(*x)++;
 		j++;
 	}
 }
@@ -63,17 +74,21 @@ void	parse_into_a_helper(char **result, t_ps *ps)
 int	*parse_into_a(int argc, char **argv, t_ps *ps)
 {
 	int		i;
+	int		x;
 	char	**result;
 
 	(void)argc;
 	i = 1;
+	x = 0;
 	while (argv[i])
 	{
 		result = ft_split(argv[i]);
 		if (!result)
-			return (NULL);
-		parse_into_a_helper(result, ps);
-		free(result);
+			error_n_free(ps);
+		ps->tmp_split = result;
+		parse_into_a_helper(result, ps, &x);
+		ps->tmp_split = NULL;
+		free_split(result);
 		i++;
 	}
 	return (ps->a);
@@ -103,13 +118,13 @@ int	main(int argc, char **argv)
 	allocate_stacks(ps);
 	parse_into_a(argc, argv, ps);
 	index_stack(ps);
-	if (is_sorted(ps->a, ps->size_a))
+	if (is_sorted(ps->a, ps->size_a) == 0)
 	{
 		free_ps(ps);
 		return (0);
 	}
 	if (ps->size_a <= 5)
-		sort_small_stack(ps->a, &ps->size_a, ps->b, &ps->size_b);
+		sort_small_stack(ps);
 	else
 		radix_sort(ps);
 	free_ps(ps);

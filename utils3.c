@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:18:13 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 18:57:56 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 19:47:48 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ int	*index_sorted(int *tab, int size)
 	int	*sort_copy;
 	int	i;
 	int	j;
-	int	count;
 
 	i = 0;
 	sort_copy = bubble_sort_tab(tab, size);
 	index_tab = tab_dup(tab, size);
-	while (i++ < size)
+	while (i < size)
 	{
 		j = 0;
-		count = 0;
-		while (j++ < size && count == 0)
+		while (j < size)
 		{
 			if (tab[i] == sort_copy[j])
 			{	
 				index_tab[i] = j;
-				count++;
+				break ;
 			}
+			j++;
 		}
+		i++;
 	}
 	free(sort_copy);
 	return (index_tab);
@@ -72,15 +72,16 @@ t_ps	*create_ps(int argc, char **argv)
 	ps->size_a = 0;
 	ps->size_b = 0;
 	ps->size_max = 0;
+	ps->tmp_split = NULL;
 	return (ps);
 }
 
 void	allocate_stacks(t_ps *ps)
 {
-	ps->a = malloc(ps->size_a * sizeof(int));
+	ps->a = (int *)calloc(ps->size_a, sizeof(int));
 	if (!ps->a)
 		error_n_free(ps);
-	ps->b = malloc(ps->size_b * sizeof(int));
+	ps->b = (int *)calloc(ps->size_a, sizeof(int));
 	if (!ps->b)
 		error_n_free(ps);
 }

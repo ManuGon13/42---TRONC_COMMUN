@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:27:49 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 17:44:06 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 19:40:50 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 #include <stdlib.h>
 #include <limits.h>
 
-void	sort_stackof_3(int *a, int *size_a)
+void	sort_stackof_3(t_ps *ps)
 {
-	if (is_sorted(a, *size_a) == 0)
+	if (is_sorted(ps->a, ps->size_a) == 0)
 		return ;
-	if (a[0] > a[1] && a[0] < a[2])
-		swap_top(a, *size_a);
-	else if (a[0] > a[1] && a[1] > a[2])
+	if (ps->a[0] > ps->a[1] && ps->a[0] < ps->a[2])
+		op_sa(ps);
+	else if (ps->a[0] > ps->a[1] && ps->a[1] > ps->a[2])
 	{
-		swap_top(a, *size_a);
-		rotate_down(a, *size_a);
+		op_sa(ps);
+		op_rra(ps);
 	}
-	else if (a[0] > a[1] && a[0] > a[2])
-		rotate_up(a, *size_a);
-	else if (a[0] < a[1] && a[1] > a[2] && a[0] < a[2])
+	else if (ps->a[0] > ps->a[1] && ps->a[0] > ps->a[2])
+		op_ra(ps);
+	else if (ps->a[0] < ps->a[1] && ps->a[1] > ps->a[2] && ps->a[0] < ps->a[2])
 	{
-		swap_top(a, *size_a);
-		rotate_up(a, *size_a);
+		op_sa(ps);
+		op_ra(ps);
 	}
-	else if (a[0] < a[1] && a[0] > a[2])
-		rotate_down(a, *size_a);
+	else if (ps->a[0] < ps->a[1] && ps->a[0] > ps->a[2])
+		op_rra(ps);
 }
 
 int	find_min_pos(int *a, int size_a)
@@ -55,58 +55,58 @@ int	find_min_pos(int *a, int size_a)
 	return (min);
 }
 
-void	min_to_top(int *a, int size_a)
+void	min_to_top(t_ps *ps)
 {
 	int	moves;
 	int	min_pos;
 
-	if (is_sorted(a, size_a) == 0)
+	if (is_sorted(ps->a, ps->size_a) == 0)
 		return ;
-	min_pos = find_min_pos(a, size_a);
-	if (min_pos <= size_a / 2)
+	min_pos = find_min_pos(ps->a, ps->size_a);
+	if (min_pos <= ps->size_a / 2)
 	{
 		while (min_pos > 0)
 		{
-			rotate_up(a, size_a);
+			op_ra(ps);
 			min_pos--;
 		}
 	}
 	else
 	{
-		moves = size_a - min_pos;
+		moves = ps->size_a - min_pos;
 		while (moves > 0)
 		{
-			rotate_down(a, size_a);
+			op_rra(ps);
 			moves--;
 		}
 	}
 }	
 
-void	sort_stackof_4or5(int *a, int *size_a, int *b, int *size_b)
+void	sort_stackof_4or5(t_ps *ps)
 {
-	while (*size_a > 3)
+	while (ps->size_a > 3)
 	{
-		min_to_top(a, *size_a);
-		push_b(a, b, size_a, size_b);
+		min_to_top(ps);
+		op_pb(ps);
 	}
-	sort_stackof_3(a, size_a);
-	if (*size_b == 2 && b[0] < b[1])
-		swap_top(b, *size_b);
-	while (*size_b > 0)
-		push_a(a, b, size_a, size_b);
+	sort_stackof_3(ps);
+	if (ps->size_b == 2 && ps->b[0] < ps->b[1])
+		op_sb(ps);
+	while (ps->size_b > 0)
+		op_pa(ps);
 }	
 
-void	sort_small_stack(int *a, int *size_a, int *b, int *size_b)
+void	sort_small_stack(t_ps *ps)
 {
-	if (*size_a == 2)
+	if (ps->size_a == 2)
 	{
-		if (a[0] > a[1])
-			swap_top(a, *size_a);
-		else if (a[0] < a[1])
+		if (ps->a[0] > ps->a[1])
+			op_sa(ps);
+		else if (ps->a[0] < ps->a[1])
 			return ;
 	}
-	if (*size_a == 3)
-		sort_stackof_3(a, size_a);
-	if (*size_a == 4 || *size_a == 5)
-		sort_stackof_4or5(a, size_a, b, size_b);
+	if (ps->size_a == 3)
+		sort_stackof_3(ps);
+	if (ps->size_a == 4 || ps->size_a == 5)
+		sort_stackof_4or5(ps);
 }

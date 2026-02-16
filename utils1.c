@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:18:13 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 17:40:09 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 19:47:48 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 void	error_n_free(t_ps *ps)
 {
+	if (ps->tmp_split)
+		free_split(ps->tmp_split);
 	free(ps->a);
 	free(ps->b);
 	free(ps);
