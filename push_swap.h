@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 16:22:09 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 17:23:41 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 18:50:37 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_ps
 void		allocate_stacks(t_ps *ps);
 int			*bubble_sort_tab(int *tab, int size);
 int			check_doublon(int x, int *tab, int j);
-t_ps		create_ps(int argc, char **argv);
+t_ps		*create_ps(int argc, char **argv);
 int			count_numbers(int argc, char **argv, t_ps *ps);
 int			count_nums(char *str);
 void		error_n_free(t_ps *ps);
@@ -54,9 +54,9 @@ void		op_rra(t_ps *ps);
 void		op_rrb(t_ps *ps);
 void		op_rrr(t_ps *ps);
 int			*parse_into_a(int argc, char **argv, t_ps *ps);
+void		parse_into_a_helper(char **result, t_ps *ps);
 void		push_b(int *a, int *b, int *size_a, int *size_b);
 void		push_a(int *a, int *b, int *size_a, int *size_b);
-static void	print_stack(char *name, int *tab, int size);
 void		rotate_up(int *tab, int size);
 void		rotate_down(int *tab, int size);
 void		sort_stackof_3(int *a, int *size_a);

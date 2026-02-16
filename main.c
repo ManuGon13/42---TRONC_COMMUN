@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 14:20:57 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 18:00:29 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 18:49:45 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	count_numbers(int argc, char **argv, t_ps *ps)
 {
 	char	**result;
 	int		i;
+	int		j;
 
+	(void)argc;
 	i = 1;
 	while (argv[i])
 	{
@@ -38,41 +40,39 @@ int	count_numbers(int argc, char **argv, t_ps *ps)
 	return (j);
 }
 
-void	allocate_stacks(t_ps *ps)
+void	parse_into_a_helper(char **result, t_ps *ps)
 {
-	ps->a = malloc(ps->size_a * sizeof(int));
-	if (!ps->a)
-		return (1);
-	ps->b = malloc(ps->size_b * sizeof(int));
-	if (!ps->b)
-		return (1);
+	int		j;
+	int		x;
+	long	num_conv;
+
+	j = 0;
+	x = 0;
+	while (result[j])
+	{
+		num_conv = ft_atol(result[j], ps);
+		if (check_doublon((int)num_conv, ps->a, x) == 1)
+			error_n_free(ps);
+		ps->a[x] = (int)num_conv;
+		free(result[j]);
+		x++;
+		j++;
+	}
 }
 
 int	*parse_into_a(int argc, char **argv, t_ps *ps)
 {
 	int		i;
-	int		j;
-	int		x;
-	long	num_conv;
 	char	**result;
 
+	(void)argc;
 	i = 1;
-	x = 0;
-	j = 0;
 	while (argv[i])
 	{
 		result = ft_split(argv[i]);
-		j = 0;
-		while (result[j])
-		{
-			num_conv = ft_atol(result[j], ps);
-			if (check_doublon((int)num_conv, ps->a, x) == 1)
-				error_n_free(ps);
-			ps->a[x] = (int)num_conv;
-			free(result[j]);
-			j++;
-			x++;
-		}
+		if (!result)
+			return (NULL);
+		parse_into_a_helper(result, ps);
 		free(result);
 		i++;
 	}
@@ -97,6 +97,8 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	ps = create_ps(argc, argv);
+	if (!ps)
+		error_n_free(ps);
 	count_numbers(argc, argv, ps);
 	allocate_stacks(ps);
 	parse_into_a(argc, argv, ps);
@@ -107,7 +109,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	if (ps->size_a <= 5)
-		sort_small_stack(ps);
+		sort_small_stack(ps->a, &ps->size_a, ps->b, &ps->size_b);
 	else
 		radix_sort(ps);
 	free_ps(ps);

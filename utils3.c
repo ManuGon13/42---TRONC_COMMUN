@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:18:13 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 18:00:16 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 18:57:56 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_doublon(int x, int *tab, int j)
 	return (0);
 }
 
-t_ps	create_ps(int argc, char **argv)
+t_ps	*create_ps(int argc, char **argv)
 {
 	t_ps	*ps;
 
@@ -66,11 +66,21 @@ t_ps	create_ps(int argc, char **argv)
 	(void)argv;
 	ps = malloc(sizeof(t_ps));
 	if (!ps)
-		return (1);
+		return (NULL);
 	ps->a = NULL;
 	ps->b = NULL;
 	ps->size_a = 0;
 	ps->size_b = 0;
 	ps->size_max = 0;
 	return (ps);
+}
+
+void	allocate_stacks(t_ps *ps)
+{
+	ps->a = malloc(ps->size_a * sizeof(int));
+	if (!ps->a)
+		error_n_free(ps);
+	ps->b = malloc(ps->size_b * sizeof(int));
+	if (!ps->b)
+		error_n_free(ps);
 }

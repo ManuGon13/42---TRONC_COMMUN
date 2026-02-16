@@ -47,7 +47,7 @@ int	is_sorted(int *a, int size_a)
 	return (0);
 }
 
-static void	print_stack(char *name, int *tab, int size)
+/*static void	print_stack(char *name, int *tab, int size)
 {
 	int	i;
 
@@ -59,4 +59,4 @@ static void	print_stack(char *name, int *tab, int size)
 		i++;
 	}
 	ft_printf("\n");
-}
+}*/
