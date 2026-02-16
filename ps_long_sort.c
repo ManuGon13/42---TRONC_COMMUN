@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 18:41:28 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 20:06:37 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 20:20:46 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,11 @@ void	push_max_to_a(t_ps *ps)
 	op_pa(ps);
 }
 
-void	chunk_sort(t_ps *ps)
+void	chunk_sort_helper(t_ps *ps, int chunk_count)
 {
 	int	chunk_size;
-	int	chunk_count;
 	int	pushed;
 
-	if (ps->size_a <= 100)
-		chunk_count = 5;
-	else if (ps->size_a <= 250)
-		chunk_count = 8;
-	else
-		chunk_count = 11;
 	chunk_size = ps->size_a / chunk_count;
 	pushed = 0;
 	while (ps->size_a > 0)
@@ -84,13 +77,21 @@ void	chunk_sort(t_ps *ps)
 		else
 			op_ra(ps);
 	}
-	while (ps->size_b > 0)
-		push_max_to_a(ps);
 }
 
-void	radix_sort(t_ps *ps)
+void	chunk_sort(t_ps *ps)
 {
+	int	chunk_count;
+
 	if (!ps || ps->size_a < 2)
 		return ;
-	chunk_sort(ps);
+	if (ps->size_a <= 100)
+		chunk_count = 5;
+	else if (ps->size_a <= 250)
+		chunk_count = 8;
+	else
+		chunk_count = 11;
+	chunk_sort_helper(ps, chunk_count);
+	while (ps->size_b > 0)
+		push_max_to_a(ps);
 }

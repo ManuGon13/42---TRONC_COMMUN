@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:18:13 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 19:47:48 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 20:22:22 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,19 @@ void	allocate_stacks(t_ps *ps)
 	ps->b = (int *)calloc(ps->size_a, sizeof(int));
 	if (!ps->b)
 		error_n_free(ps);
+}
+
+void	free_split(char **split)
+{
+	int	i;
+
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

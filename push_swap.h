@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 16:22:09 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 19:47:48 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 20:14:03 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void		sort_stackof_4or5(t_ps *ps);
 void		sort_small_stack(t_ps *ps);
 void		swap_top(int *tab, int size);
 int			*tab_dup(int *tab, int size);
-void		radix_sort(t_ps *ps);
+void		chunk_sort(t_ps *ps);
 
 #endif

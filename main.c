@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 14:20:57 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 19:47:48 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/16 20:44:43 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,25 @@ int	count_numbers(int argc, char **argv, t_ps *ps)
 {
 	char	**result;
 	int		i;
-	int		j;
+	int		count;
 
 	(void)argc;
 	i = 1;
 	while (argv[i])
 	{
 		result = ft_split(argv[i]);
-		j = 0;
-		while (result[j])
-		{
-			ps->size_a++;
-			j++;
-		}
+		if (!result)
+			error_n_free(ps);
+		count = 0;
+		while (result[count])
+			count++;
+		if (count == 0 && (free_split(result), 1))
+			error_n_free(ps);
+		ps->size_a += count;
 		free_split(result);
 		i++;
 	}
-	return (j);
-}
-
-void	free_split(char **split)
-{
-	int	i;
-
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
+	return (0);
 }
 
 void	parse_into_a_helper(char **result, t_ps *ps, int *x)
@@ -115,6 +102,8 @@ int	main(int argc, char **argv)
 	if (!ps)
 		error_n_free(ps);
 	count_numbers(argc, argv, ps);
+	if (ps->size_a == 0)
+		error_n_free(ps);
 	allocate_stacks(ps);
 	parse_into_a(argc, argv, ps);
 	index_stack(ps);
@@ -126,7 +115,7 @@ int	main(int argc, char **argv)
 	if (ps->size_a <= 5)
 		sort_small_stack(ps);
 	else
-		radix_sort(ps);
+		chunk_sort(ps);
 	free_ps(ps);
 	return (0);
 }
