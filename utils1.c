@@ -6,7 +6,7 @@
 /*   By: egonin <egonin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:18:13 by egonin            #+#    #+#             */
-/*   Updated: 2026/02/16 19:47:48 by egonin           ###   ########.fr       */
+/*   Updated: 2026/02/17 15:18:55 by egonin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	is_number(char *str, t_ps *ps)
 
 	i = 0;
 	sign = 0;
+	if (str[0] == '\0')
+		error_n_free(ps);
 	while (str[i])
 	{
-		if (str[i] == '\0')
-			error_n_free(ps);
 		if (str[i] == '-' || str[i] == '+')
 		{
 			sign = 1;
